@@ -1,21 +1,22 @@
 ===============================
-PSF_XYZ_Bead_Fit
+PSF-XYZ Bead Fit
 ===============================
 
 This program can be used to detect beads an measures the FWHM-XYZ of the PSF.
 The crucial steps are:
-    1) read the z-stack via BioFormats
-    2) find the brightest voxel and uses the corresponding XY-plane (hot pixels still may ruin the results)
-    3) detect all peaks within the XY-plane from 2)
-    4) extract the Z-profile at every detected peak position
-    5) determine the brightest XY-plane for every peak separately
-    6) cutout sub-images at every detected peak position
-    7) do 2D-Gauss fit for every peak to determine FWHM-XY
-    8) do 1D-Gauss fit for every Z-Profile to determine FWHM-Z
-    9) displays PSF OrthoView and PSF volume for the average PSF = sum of all detected PSFs
-    10) optional - displays PSF OrthoView and PSF volume for one randomly selected peak (optional)
-    11) optional - write results to excel sheet (currently only XLS)
-    12) optional - save output graphics as PNGs
+
+* read the z-stack via BioFormats
+* find the brightest voxel and uses the corresponding XY-plane (hot pixels still may ruin the results)
+* detect all peaks within the XY-plane from 2)
+* extract the Z-profile at every detected peak position
+* determine the brightest XY-plane for every peak separately
+* cutout sub-images at every detected peak position
+* do 2D-Gauss fit for every peak to determine FWHM-XY
+* do 1D-Gauss fit for every Z-Profile to determine FWHM-Z
+* displays PSF OrthoView and PSF volume for the average PSF = sum of all detected PSFs
+* optional - displays PSF OrthoView and PSF volume for one randomly selected peak (optional)
+* optional - write results to excel sheet (currently only XLS)
+* optional - save output graphics as PNGs
 
 :Author: Sebastian Rhode
 
@@ -44,3 +45,30 @@ References
      http://www.openmicroscopy.org/site/support/file-formats/ome-tiff
 (3)  Read microscopy images to numpy array with python-bioformats.
      http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
+
+Screeshots
+----------
+
+Main GUI:
+
+.. figure:: images/PSF-XYZ_GUI.png
+   :align: center
+   :alt: 
+
+FHWM Report:
+
+.. figure:: images/PSF_XYZ_FWHM.png
+   :align: center
+   :alt: 
+
+PSF Volume & Cross Sections:
+
+.. figure:: images/PSF-XYZ_Volume_Cross.png
+   :align: center
+   :alt: 
+
+PSF OrthoView:
+
+.. figure:: images/PSF-XYZ_OrthoView.png
+   :align: center
+   :alt:
