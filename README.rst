@@ -44,3 +44,22 @@ References
      http://www.openmicroscopy.org/site/support/file-formats/ome-tiff
 (3)  Read microscopy images to numpy array with python-bioformats.
      http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
+
+Screeshots
+----------
+
+Main GUI:
+
+![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-XYZ_GUI.png)
+
+FHWM Report:
+
+![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-FWHM.png)
+
+PSF Volume & Cross Sections:
+
+![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-Volume_Cross.png)
+
+PSF OrthoView:
+
+![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-OrthoView.png)
