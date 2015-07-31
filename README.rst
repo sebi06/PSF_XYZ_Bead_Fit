@@ -25,10 +25,10 @@ Requirements
 ------------
 * `CPython 2.7 <http://www.python.org>`_
 * `Numpy 1.8.2 <http://www.numpy.org>`_
-* `Numpy 1.8.2 <https://pypi.python.org/pypi/xlwt>`_
-* `Numpy 1.8.2 <https://pypi.python.org/pypi/scipy>`_
-* `Numpy 1.8.2 <https://pypi.python.org/pypi/visvis>`_
-* `Numpy 1.8.2 <https://pypi.python.org/pypi/scikit-image>`_
+* `xlwt <https://pypi.python.org/pypi/xlwt>`_
+* `SciPy <https://pypi.python.org/pypi/scipy>`_
+* `VisVis <https://pypi.python.org/pypi/visvis>`_
+* `Scikit-Image <https://pypi.python.org/pypi/scikit-image>`_
 * `bfimage package <https://github.com/sebi06/BioFormatsRead>`_
 
 Notes
