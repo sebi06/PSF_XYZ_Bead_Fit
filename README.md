@@ -1,5 +1,5 @@
 ===============================
-PSF_XYZ_Bead_Fit
+PSF-XYZ Bead Fit
 ===============================
 
 This program can be used to detect beads an measures the FWHM-XYZ of the PSF.
@@ -50,16 +50,16 @@ Screeshots
 
 Main GUI:
 
-![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-XYZ_GUI.png)
+![alt tag]images/PSF-XYZ_GUI.png)
 
 FHWM Report:
 
-![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-FWHM.png)
+![alt tag]images/PSF-FWHM.png)
 
 PSF Volume & Cross Sections:
 
-![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-Volume_Cross.png)
+![alt tag](images/PSF-Volume_Cross.png)
 
 PSF OrthoView:
 
-![alt tag](https://github.com/sebi06/PSF_XYZ_Bead_Fit/tree/master/images/PSF-OrthoView.png)
+![alt tag]images/PSF-OrthoView.png)
