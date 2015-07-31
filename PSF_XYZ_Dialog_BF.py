@@ -65,13 +65,12 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         self.BeadData = {}
 
         # define individual bioformats_package.jar to use
-        bf.set_bfpath(r'c:\Users\M1SRH\Documents\Software\BioFormats_Package\5.1.1\bioformats_package.jar')
+        bf.set_bfpath(r'/home/sebi06/Dokumente/GitHub/BioFormatsRead/bioformats_package.jar')
 
     def onopen_file(self):
         # open image file dialog with default starting directory
-
-        # default_folder = r'r:\Testpictures\Beads'
-        default_folder = r'c:\Users\M1SRH\Documents\Spyder_Projects_Testdata\PSF_XYZ_Bead_Fit'
+        default_folder = os.getcwd()
+        # default directory = 'YourPSFData'
 
         psfstack_filepath = QtGui.QFileDialog.getOpenFileName(self, 'Open file',
                                 default_folder, 'CZI Files (*.czi);; TIF Files (*.tif);; TIFF Files (*.tiff)')
@@ -81,6 +80,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
 
         # get image data file location
         imagefilepath = str(self.text_filename.text())
+
 
         # get the relevant MetaData
         self.MetaInfo = bf.bftools.get_relevant_metainfo_wrapper(imagefilepath)
