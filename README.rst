@@ -50,7 +50,7 @@ Screeshots
 
 Main GUI:
 
-.. figure:: ../images/PSF-XYZ_GUI.png
+.. figure:: images/PSF-XYZ_GUI.png
    :align: center
    :alt: 
 
