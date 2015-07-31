@@ -22,8 +22,6 @@ The package is still under development and was mainly tested with CZI files.
 Acknowledgements
 ----------------
 *   Christoph Gohlke from providing the czifily.py.
-*   The Cellprofiler team for providing python-bioformats
-*   The OME people for creating BioFormats                                                                                 
 
 References
 ----------
