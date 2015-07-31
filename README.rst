@@ -56,18 +56,18 @@ Main GUI:
 
 FHWM Report:
 
-.. figure:: images/PSF-FWHM.png
+.. figure:: images/PSF-XYZ_FWHM.png
    :align: center
    :alt: 
 
 PSF Volume & Cross Sections:
 
-.. figure:: images/PSF-Volume_Cross.png
+.. figure:: images/PSF-XYZ_Volume_Cross.png
    :align: center
    :alt: 
 
 PSF OrthoView:
 
-.. figure:: images/PSF-OrthoView.png
+.. figure:: images/PSF-XYZ_OrthoView.png
    :align: center
    :alt:
