@@ -56,7 +56,7 @@ Main GUI:
 
 FHWM Report:
 
-.. figure:: images/PSF-XYZ_FWHM.png
+.. figure:: images/PSF_XYZ_FWHM.png
    :align: center
    :alt: 
 
