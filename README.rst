@@ -50,16 +50,24 @@ Screeshots
 
 Main GUI:
 
-![alt tag]images/PSF-XYZ_GUI.png)
+.. figure:: ../images/PSF-XYZ_GUI.png
+   :align: center
+   :alt: 
 
 FHWM Report:
 
-![alt tag]images/PSF-FWHM.png)
+.. figure:: ../images/PSF-FWHM.png
+   :align: center
+   :alt: 
 
 PSF Volume & Cross Sections:
 
-![alt tag](images/PSF-Volume_Cross.png)
+.. figure:: ../images/PSF-Volume_Cross.png
+   :align: center
+   :alt: 
 
 PSF OrthoView:
 
-![alt tag]images/PSF-OrthoView.png)
+.. figure:: ../images/PSF-OrthoView.png
+   :align: center
+   :alt:
