@@ -47,7 +47,7 @@ References
      http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
 
 Screenshots
-----------
+-----------
 
 Main GUI:
 
