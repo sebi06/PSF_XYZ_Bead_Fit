@@ -39,18 +39,12 @@ It uses BioFormats to read the image data into numpy arrays and uses the package
 
 References
 ----------
-(1)  CZI - Image format for microscopes
-     http://www.zeiss.com/czi
-(2)  The OME-TIFF format.
-     http://www.openmicroscopy.org/site/support/file-formats/ome-tiff
-(3)  Read microscopy images to numpy array with python-bioformats.
-     http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
-(4)  The Python-BioFormats package
-     http://downloads.openmicroscopy.org/bio-formats/
-(5)  czifile.py by Christoph Gohlke
-     http://www.lfd.uci.edu/~gohlke/code/czifile.py.html
-(6)  tifffile.py by Christoph Gohlke
-     http://www.lfd.uci.edu/~gohlke/code/tifffile.py.html
+(1)  CZI - Image format for microscopes - http://www.zeiss.com/czi
+(2)  The OME-TIFF format - http://www.openmicroscopy.org/site/support/file-formats/ome-tiff
+(3)  Read microscopy images to numpy array with python-bioformats - http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
+(4)  The Python-BioFormats package - http://downloads.openmicroscopy.org/bio-formats/
+(5)  czifile.py by Christoph Gohlke - http://www.lfd.uci.edu/~gohlke/code/czifile.py.html
+(6)  tifffile.py by Christoph Gohlke - http://www.lfd.uci.edu/~gohlke/code/tifffile.py.html
 
 Screenshots
 -----------
