@@ -29,8 +29,11 @@ import psfview as psf
 import matplotlib.pyplot as plt
 from xlwt import Workbook
 import os
+#import sys
+#sys.path.append('c:\Users\M1SRH\Documents\Spyder_Projects\BioFormatsRead')
 import bfimage as bf
 import skimage.feature as sf
+from scipy.ndimage import median_filter
 #import warnings
 #warnings.filterwarnings('error')
 
@@ -65,12 +68,12 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         self.BeadData = {}
 
         # define individual bioformats_package.jar to use
-        bf.set_bfpath(r'/home/sebi06/Dokumente/GitHub/BioFormatsRead/bioformats_package.jar')
+        #bf.set_bfpath(r'/home/sebi06/Dokumente/GitHub/BioFormatsRead/bioformats_package.jar')
 
     def onopen_file(self):
         # open image file dialog with default starting directory
-        default_folder = os.getcwd()
-        # default directory = 'YourPSFData'
+        #default_folder = os.getcwd()
+        default_folder = 'c:/Users/M1SRH/Documents/Testdata_Zeiss/Castor/Beta_Bonn/20150923'
 
         psfstack_filepath = QtGui.QFileDialog.getOpenFileName(self, 'Open file',
                                 default_folder, 'CZI Files (*.czi);; TIF Files (*.tif);; TIFF Files (*.tiff)')
@@ -81,6 +84,9 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         # get image data file location
         imagefilepath = str(self.text_filename.text())
 
+        # specify bioformats_package.jar to use if required
+        #bf.set_bfpath('c:\Users\M1SRH\Documents\Software\BioFormats_Package\5.1.3\bioformats_package.jar')
+        bf.set_bfpath('c:\Users\M1SRH\Documents\Spyder_Projects\PSF_XYZ_Bead_Fit_BioFormats\bioformats_package.jar')
 
         # get the relevant MetaData
         self.MetaInfo = bf.bftools.get_relevant_metainfo_wrapper(imagefilepath)
@@ -388,12 +394,19 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         # get the z-stack using BioFormats
         channel = self.SpinBox_channel.value() - 1
         imagestack = np.squeeze(bf.bftools.get_zstack(imagefilepath, self.MetaInfo['Sizes'], seriesID, timepoint)[:, channel, :, :])
-
+        
+        upper_threshold = 3000       
+        if imagestack.max() > upper_threshold:
+            
+            imagestack = adjust_max(imagestack, maxlimit = upper_threshold)
+        
         # offset subtraction if image contains an offset
         imagestack = imagestack - self.SpinBox_offset.value()
 
         # find brightest xy-plane and extract this plane
         # [zpos, planexy] = self.find_stackmax(imagestack)
+        
+
         [zpos, planexy] = find_stackmax(imagestack)
 
         # check dimensions --> switched !!!
@@ -458,6 +471,26 @@ def cut_subimages(peaknumber, peakx, peaky, zplanes, subimagesize, stack):
         #print 'XY Subimage : ', subimage.shape[0], subimage.shape[1]
 
     return imagelist
+
+
+def adjust_max(stack, maxlimit):
+    
+    print 'Old Stackmax: ', stack.max()    
+    
+    if stack.max() > maxlimit:
+        
+        for z in range(0, stack.shape[0]):
+            plane = stack[z, :, :]
+            pos_max = (plane > maxlimit).nonzero()
+            plane[pos_max] = np.round(plane.mean())
+            #plane = median_filter(plane, size=5)
+            stack[z, :, :] = plane
+            #print 'New PlaneMax : ',stack[z,:,:].max()
+        
+    print 'New Stackmax: ', stack.max()
+            
+    return stack
+
 
 def find_stackmax(stack):
     # finds the zplane with contains the overall maximum position within the stack

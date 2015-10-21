@@ -15,24 +15,23 @@ import skimage.feature as sf
 
 
 def find_stackmax(imagestack):
+
     # find the zplane which contains the overall maximum position within the Z-stack
     overall_max = imagestack.max()
     position = (imagestack == overall_max).nonzero()
     zpos = position[0][0]
     # extract plane containing the brightest pixel
-    planexy = imagestack[zpos]
+    planexy = imagestack[zpos, :, :]
     
     return zpos, planexy
 
 
-def psf_orthoview(stack, width, z, ratio, filepath):
+def psf_orthoview(stack, width, z, ratio, filepath, subimgsize):
 
     # find brightest xy-plane and extract plane
     [zpos, planexy] = find_stackmax(stack)
-    # get minimal distance --> use subimage size / 2
-    # peak detection with scikit-image
-    peaks = sf.peak_local_max(planexy, min_distance=2, threshold_abs=0.2, exclude_border=True,
-                              indices=True, num_peaks=inf)
+    # peak detection with scikit-image - only one peak is allowed
+    peaks = sf.peak_local_max(planexy, min_distance=subimgsize-1, threshold_abs=0.5, exclude_border=True, indices=True, num_peaks=1)
 
     peaknum = len(peaks)
     xpos = np.zeros(len(peaks))
@@ -80,6 +79,7 @@ def psf_orthoview(stack, width, z, ratio, filepath):
         savename = filepath[:-4] + '_PSF_OrthoView.png'
         fig.savefig(savename)
 
+
 def psf_volume(stack, xyz_ratio, filepath):
 
     app = vv.use()
@@ -122,4 +122,4 @@ def psf_volume(stack, xyz_ratio, filepath):
     if filepath != 'nosave':
         print 'Saving PSF volume.'
         savename = filepath[:-4] + '_PSF_3D.png'
-        vv.screenshot(savename, sf=1, bg='w')  # sf: scale factor
+        vv.screenshot(savename, sf=1, bg='w') # sf: scale factor
