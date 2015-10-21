@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>883</width>
-    <height>412</height>
+    <width>937</width>
+    <height>449</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,15 +22,15 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>PSF-XYZ Automatic Detection BF V1.1</string>
+   <string>PSF-XYZ Automatic Detection BF V1.2</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>868</width>
-     <height>396</height>
+     <width>918</width>
+     <height>431</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">

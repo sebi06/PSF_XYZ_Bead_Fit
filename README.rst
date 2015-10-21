@@ -51,7 +51,7 @@ Screenshots
 
 Main GUI:
 
-.. figure:: images/PSF-XYZ_GUI.png
+.. figure:: images/PSFBead_Fit_GUI.png
    :align: center
    :alt: 
 

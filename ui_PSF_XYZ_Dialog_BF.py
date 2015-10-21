@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\M1SRH\Documents\Spyder_Projects\PSFBead_Fit\PSF_XYZ_Dialog_BF.ui'
+# Form implementation generated from reading ui file '/home/sebi06/Dokumente/GitHub/PSFBead_Fit/PSF_XYZ_Dialog_BF.ui'
 #
-# Created by: PyQt4 UI code generator 4.11.4
+# Created: Wed Oct 21 22:43:48 2015
+#      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -25,7 +26,7 @@ except AttributeError:
 class Ui_PSF_XYZ_Dialog_BF(object):
     def setupUi(self, PSF_XYZ_Dialog_BF):
         PSF_XYZ_Dialog_BF.setObjectName(_fromUtf8("PSF_XYZ_Dialog_BF"))
-        PSF_XYZ_Dialog_BF.resize(883, 412)
+        PSF_XYZ_Dialog_BF.resize(937, 449)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,9 +36,10 @@ class Ui_PSF_XYZ_Dialog_BF(object):
         font.setPointSize(10)
         PSF_XYZ_Dialog_BF.setFont(font)
         self.layoutWidget = QtGui.QWidget(PSF_XYZ_Dialog_BF)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 868, 396))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 918, 431))
         self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.gridLayout = QtGui.QGridLayout(self.layoutWidget)
+        self.gridLayout.setMargin(0)
         self.gridLayout.setHorizontalSpacing(6)
         self.gridLayout.setVerticalSpacing(10)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -376,7 +378,7 @@ class Ui_PSF_XYZ_Dialog_BF(object):
         QtCore.QMetaObject.connectSlotsByName(PSF_XYZ_Dialog_BF)
 
     def retranslateUi(self, PSF_XYZ_Dialog_BF):
-        PSF_XYZ_Dialog_BF.setWindowTitle(_translate("PSF_XYZ_Dialog_BF", "PSF-XYZ Automatic Detection BF V1.1", None))
+        PSF_XYZ_Dialog_BF.setWindowTitle(_translate("PSF_XYZ_Dialog_BF", "PSF-XYZ Automatic Detection BF V1.2", None))
         self.check_hotpixel.setText(_translate("PSF_XYZ_Dialog_BF", "Check for HotPixels", None))
         self.checkBox_SavePeaks.setText(_translate("PSF_XYZ_Dialog_BF", "Save PSF Peaks FWHM", None))
         self.label_channel.setText(_translate("PSF_XYZ_Dialog_BF", "Select Channel", None))
