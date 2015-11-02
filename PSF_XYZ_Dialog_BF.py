@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: Sebi
+@author: sebi
 
 PSF_XYZ_Dialog_BF.py
 Version: 1.5
