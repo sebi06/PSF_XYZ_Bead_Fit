@@ -26,12 +26,12 @@ def find_stackmax(imagestack):
     return zpos, planexy
 
 
-def psf_orthoview(stack, width, z, ratio, filepath, subimgsize):
+def psf_orthoview(stack, width, z, ratio, filepath, subimgsize, threshold):
 
     # find brightest xy-plane and extract plane
     [zpos, planexy] = find_stackmax(stack)
     # peak detection with scikit-image - only one peak is allowed
-    peaks = sf.peak_local_max(planexy, min_distance=subimgsize-1, threshold_abs=0.5,
+    peaks = sf.peak_local_max(planexy, min_distance=1, threshold_rel=threshold,
                               exclude_border=True, indices=True, num_peaks=1)
 
     peaknum = len(peaks)
