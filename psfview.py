@@ -3,8 +3,8 @@
 @author: Sebi
 
 psfview.py
-Version: 0.3
-Date: 2015-05-15
+Version: 0.4
+Date: 2015-11-02
 """
 
 from pylab import *
@@ -30,7 +30,7 @@ def psf_orthoview(stack, width, z, ratio, filepath, subimgsize, threshold):
 
     # find brightest xy-plane and extract plane
     [zpos, planexy] = find_stackmax(stack)
-    # peak detection with scikit-image - only one peak is allowed
+    # peak detection with scikit-image - only 1 peak is allowed
     peaks = sf.peak_local_max(planexy, min_distance=1, threshold_rel=threshold,
                               exclude_border=True, indices=True, num_peaks=1)
 
@@ -44,13 +44,9 @@ def psf_orthoview(stack, width, z, ratio, filepath, subimgsize, threshold):
 
     planexz = stack[:, ypos[0], :]
     planeyz = stack[:, :, xpos[0]]
-    
-    #planexz = np.rot90(planexz)
     planeyz = np.rot90(planeyz)
     
     a1 = 1.0
-    #a2 = (2.0*width) / (2*z)
-    #a3 = (2.0*z)/(2*width)
     a2 = 1/ratio
     a3 = ratio
 
@@ -84,8 +80,6 @@ def psf_orthoview(stack, width, z, ratio, filepath, subimgsize, threshold):
 def psf_volume(stack, xyz_ratio, filepath):
 
     app = vv.use()
-
-    #vv.figure()
     # Init a figure with two axes
     a1 = vv.subplot(121)
     vv.title('PSF Volume')
@@ -123,4 +117,5 @@ def psf_volume(stack, xyz_ratio, filepath):
     if filepath != 'nosave':
         print 'Saving PSF volume.'
         savename = filepath[:-4] + '_PSF_3D.png'
-        vv.screenshot(savename, sf=1, bg='w') # sf: scale factor
+        # sf: scale factor
+        vv.screenshot(savename, sf=1, bg='w')
