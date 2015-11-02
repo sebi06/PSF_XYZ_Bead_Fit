@@ -5,22 +5,23 @@ PSF-XYZ Bead Fit
 This program can be used to detect beads an measures the FWHM-XYZ of the PSF.
 The crucial steps are:
 
-* read the z-stack via BioFormats
-* find the brightest voxel and uses the corresponding XY-plane (hot pixels still may ruin the results)
-* detect all peaks within the XY-plane from 2)
-* extract the Z-profile at every detected peak position
-* determine the brightest XY-plane for every peak separately
-* cutout sub-images at every detected peak position
-* do 2D-Gauss fit for every peak to determine FWHM-XY
-* do 1D-Gauss fit for every Z-Profile to determine FWHM-Z
-* displays PSF OrthoView and PSF volume for the average PSF = sum of all detected PSFs
-* optional - displays PSF OrthoView and PSF volume for one randomly selected peak (optional)
-* optional - write results to excel sheet (currently only XLS)
-* optional - save output graphics as PNGs
+* Read the z-stack via BioFormats using python-bioformats.
+* Define detection parameters for the selected channel.
+* Find the brightest voxel and extract the corresponding XY-plane from Z-Stack.
+* Detect all peaks within the extracted XY-plane using scikit-image toolbox.
+* Extract the Z-profile at every detected peak position.
+* Determine the brightest XY-plane for every peak separately.
+* Cutout stack at every detected peak position.
+* Do 2D-Gauss fit for every peak to determine FWHM-XY.
+* Do 1D-Gauss fit for every Z-Profile to determine FWHM-Z.
+* Displays PSF OrthoView and PSF volume for the average PSF = sum of all detected PSFs.
+* Displays overview image with all detected peaks and 2D fit from randomly selected peak.
+* Optional - Write results to excel sheet (currently only XLS).
+* Optional - Save output graphics as PNGs.
 
 :Author: Sebastian Rhode
 
-:Version: 2015.10.21
+:Version: 2015.11.02
 
 Requirements
 ------------
