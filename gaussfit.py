@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-@author: Sebi
+@author: sebi
 
 gaussfit.py
-Version: 0.3
-Date: 2015-05-15
+Version: 0.4
+Date: 2015-11-02
 """
 
 import numpy as np
@@ -40,7 +40,6 @@ def fitgaussian1D(xdat, ydat, fwhm_guess, peak_pos):
     height = popt[1]
     center = popt[2]
     fwhm = popt[3] * 2.3548
-
 
     # get std from the diagonal of the covariance matrix
     #std_bgrd = np.sqrt(pcov1[0,0])
