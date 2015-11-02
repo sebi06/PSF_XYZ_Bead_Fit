@@ -22,8 +22,6 @@ The crucial steps are:
     12) optional - save output graphics as PNGs
 """
 
-version = 1.5
-
 from pylab import *
 import numpy as np
 import gaussfit as gf
@@ -35,7 +33,6 @@ from remove_hotpix import adjust_max
 import bfimage as bf
 import skimage.feature as sf
 
-
 from PyQt4.QtGui import *
 # Qt4 bindings for core Qt functionality (non-GUI)
 from PyQt4 import QtCore
@@ -45,6 +42,8 @@ from PyQt4 import QtGui
 # import the MainWindow widget from the converted .ui files
 import ui_PSF_XYZ_Dialog_BF
 
+# current version number
+version = 1.5
 
 class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
 
