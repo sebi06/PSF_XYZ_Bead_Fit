@@ -89,8 +89,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         imagefilepath = str(self.text_filename.text())
 
         # specify bioformats_package.jar to use if required
-        #bf.set_bfpath('c:\Users\M1SRH\Documents\Software\BioFormats_Package\5.1.4\bioformats_package.jar')
-        #bf.set_bfpath('c:\Users\M1SRH\Documents\Spyder_Projects\PSF_XYZ_Bead_Fit_BioFormats\bioformats_package.jar')
+        #bf.set_bfpath('...\BioFormats_Package\5.1.5\bioformats_package.jar')
 
         # get the relevant MetaData
         self.MetaInfo = bf.bftools.get_relevant_metainfo_wrapper(imagefilepath)
