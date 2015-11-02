@@ -3,8 +3,8 @@
 @author: Sebi
 
 PSF_XYZ_Dialog_BF.py
-Version: 1.4
-Date: 2015-06-08
+Version: 1.5
+Date: 2015-11-02
 
 This program can be used to detect beads an measures the FWHM-XYZ of the PSF.
 The crucial steps are:
@@ -21,6 +21,8 @@ The crucial steps are:
     11) optional - write results to excel sheet (currently only XLS)
     12) optional - save output graphics as PNGs
 """
+
+version = 1.5
 
 from pylab import *
 import numpy as np
@@ -49,6 +51,9 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
     def __init__(self, parent=None):
         super(PSF_XYZ_Dialog_BF, self).__init__(parent)
         self.setupUi(self)
+
+        # set window title to current version
+        self.setWindowTitle('PSF-XYZ Automatic Detection BF ' + str(version))
 
         # connect the signals with the slots
 
