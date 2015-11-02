@@ -337,10 +337,10 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         # only save plot when option is checked
         if self.checkBox_SaveOrthoView.isChecked() == True:
             psf.psf_orthoview(PSFstack_avg[zstart:zend, :, :], psfwidth, dz, ratio, self.BeadData['FilePath'],
-                              subimgsize=self.SpinBox_subimage_size.value(), threshold=self.SpinBox_threshold.value())
+                              threshold=self.SpinBox_threshold.value())
         elif self.checkBox_SavePeaks.isChecked() == False:
             psf.psf_orthoview(PSFstack_avg[zstart:zend, :, :], psfwidth, dz, ratio, 'nosave',
-                              subimgsize=self.SpinBox_subimage_size.value(), threshold=self.SpinBox_threshold.value())
+                              threshold=self.SpinBox_threshold.value())
 
         # only save plot when option is checked
         if self.checkBox_SavePSFVolume.isChecked() == True:
