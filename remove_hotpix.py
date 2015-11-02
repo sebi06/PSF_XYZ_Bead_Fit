@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep 30 16:52:51 2015
+@author: sebi
 
-@author: M1SRH
+remove_hotpix.py
+Version: 0.2
+Date: 2015-11-02
 """
 
 import numpy as np
