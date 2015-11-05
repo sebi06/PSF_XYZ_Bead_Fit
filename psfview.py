@@ -26,7 +26,7 @@ def find_stackmax(imagestack):
     return zpos, planexy
 
 
-def psf_orthoview(stack, width, z, ratio, filepath, subimgsize, threshold):
+def psf_orthoview(stack, width, z, ratio, filepath, threshold):
 
     # find brightest xy-plane and extract plane
     [zpos, planexy] = find_stackmax(stack)
