@@ -77,7 +77,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         open image file dialog with default starting directory
         """
         #default_folder = os.getcwd()
-        default_folder = r'f:\Castor_Image_Data\Castor_Beta\Castor_Beta2\20150923'
+        default_folder = r'C:\YourBeadData'
 
         psfstack_filepath = QtGui.QFileDialog.getOpenFileName(self, 'Open file',
                                 default_folder, 'CZI Files (*.czi);; TIF Files (*.tif);; TIFF Files (*.tiff)')
