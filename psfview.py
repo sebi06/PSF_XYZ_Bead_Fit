@@ -72,7 +72,7 @@ def psf_orthoview(stack, width, z, ratio, filepath, threshold):
 
     # save screenshot
     if filepath != 'nosave':
-        print 'Saving PSF OrthoView.'
+        print('Saving PSF OrthoView.')
         savename = filepath[:-4] + '_PSF_OrthoView.png'
         fig.savefig(savename)
 
@@ -115,7 +115,7 @@ def psf_volume(stack, xyz_ratio, filepath):
 
     # save screenshot
     if filepath != 'nosave':
-        print 'Saving PSF volume.'
+        print('Saving PSF volume.')
         savename = filepath[:-4] + '_PSF_3D.png'
         # sf: scale factor
         vv.screenshot(savename, sf=1, bg='w')

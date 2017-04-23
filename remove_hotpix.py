@@ -32,8 +32,8 @@ def find_hotpixel(data, tolerance=20, kernelsize=2):
 
 def adjust_max(stack, maxlimit=16384, remove_edge=3, tolerance=20, kernelsize=2):
     
-    print 'Old Stackmax: ', stack.max()
-    print 'MaxLimit ', maxlimit, ' Tolerance :', tolerance, ' KernelSize: ', kernelsize
+    print('Old Stackmax: ', stack.max())
+    print('MaxLimit ', maxlimit, ' Tolerance :', tolerance, ' KernelSize: ', kernelsize)
     
     # remove some pixel from the edges
     newstack = np.int32(stack[:, remove_edge:-remove_edge, remove_edge:-remove_edge])
@@ -45,6 +45,6 @@ def adjust_max(stack, maxlimit=16384, remove_edge=3, tolerance=20, kernelsize=2)
             hotpix, plane = find_hotpixel(newstack[z, :, :], tolerance=tolerance, kernelsize=kernelsize)
             newstack[z, :, :] = plane
         
-    print 'New Stackmax: ', newstack.max()
+    print('New Stackmax: ', newstack.max())
             
     return newstack

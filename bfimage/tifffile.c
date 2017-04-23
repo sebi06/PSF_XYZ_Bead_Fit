@@ -1,3 +1,5 @@
+
+
 /* tifffile.c
 
 A Python C extension module for decoding PackBits and LZW encoded TIFF data.
@@ -404,7 +406,7 @@ py_unpackints(PyObject *obj, PyObject *args, PyObject *kwds)
          goto _fail;
     }
     if (dtype->elsize != storagesize) {
-         PyErr_Format(PyExc_TypeError, "dtype.elsize does not fit itemsize");
+         PyErr_Format(PyExc_TypeError, "dtype.elsize doesn't fit itemsize");
          goto _fail;
     }
 
