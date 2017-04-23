@@ -94,21 +94,21 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         # get the relevant MetaData
         self.MetaInfo = bf.bftools.get_relevant_metainfo_wrapper(imagefilepath)
 
-        print 'Image Directory      : ', self.MetaInfo['Directory']
-        print 'Image Filename       : ', self.MetaInfo['Filename']
-        print 'Images Dim Sizes     : ', self.MetaInfo['Sizes']
-        print 'Dimension Order BF   : ', self.MetaInfo['DimOrder BF']
-        print 'Dimension Order CZI  : ', self.MetaInfo['OrderCZI']
-        print 'Total Series Number  : ', self.MetaInfo['TotalSeries']
-        print 'Image Dimensions     : ', self.MetaInfo['TotalSeries'], self.MetaInfo['SizeT'], self.MetaInfo['SizeZ'],\
-            self.MetaInfo['SizeC'], self.MetaInfo['SizeY'], self.MetaInfo['SizeX']
-        print 'Scaling XYZ [micron] : ', self.MetaInfo['XScale'], self.MetaInfo['YScale'], self.MetaInfo['ZScale']
-        print 'Objective M-NA-Imm   : ', self.MetaInfo['ObjMag'], self.MetaInfo['NA'], self.MetaInfo['Immersion']
-        print 'Objective Name       : ', self.MetaInfo['ObjModel']
-        print 'Detector Name        : ', self.MetaInfo['DetName']
-        print 'Ex. Wavelengths [nm] : ', self.MetaInfo['WLEx']
-        print 'Em. Wavelengths [nm] : ', self.MetaInfo['WLEm']
-        print 'Channel Description  : ', self.MetaInfo['ChDesc']
+        print('Image Directory      : ', self.MetaInfo['Directory'])
+        print('Image Filename       : ', self.MetaInfo['Filename'])
+        print('Images Dim Sizes     : ', self.MetaInfo['Sizes'])
+        print('Dimension Order BF   : ', self.MetaInfo['DimOrder BF'])
+        print('Dimension Order CZI  : ', self.MetaInfo['OrderCZI'])
+        print('Total Series Number  : ', self.MetaInfo['TotalSeries'])
+        print('Image Dimensions     : ', self.MetaInfo['TotalSeries'], self.MetaInfo['SizeT'], self.MetaInfo['SizeZ'],\
+            self.MetaInfo['SizeC'], self.MetaInfo['SizeY'], self.MetaInfo['SizeX'])
+        print('Scaling XYZ [micron] : ', self.MetaInfo['XScale'], self.MetaInfo['YScale'], self.MetaInfo['ZScale'])
+        print('Objective M-NA-Imm   : ', self.MetaInfo['ObjMag'], self.MetaInfo['NA'], self.MetaInfo['Immersion'])
+        print('Objective Name       : ', self.MetaInfo['ObjModel'])
+        print('Detector Name        : ', self.MetaInfo['DetName'])
+        print('Ex. Wavelengths [nm] : ', self.MetaInfo['WLEx'])
+        print('Em. Wavelengths [nm] : ', self.MetaInfo['WLEm'])
+        print('Channel Description  : ', self.MetaInfo['ChDesc'])
 
         self.objname_text.setText(self.MetaInfo['ObjModel'])
         if self.MetaInfo['NA'] != 'n.a.':
@@ -155,7 +155,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
             ypos[p] = peaks[p][0]
 
         # print('Detected Peak Positions : ', xpos, ypos)
-        print 'Number of Peaks : ', peaknum
+        print('Number of Peaks : ', peaknum)
 
         # return plist, xpos, ypos, peaknum
         return xpos, ypos, peaknum
@@ -183,8 +183,8 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
             # in case there are more maxima along the z-axis just take the mean ...
             zprofiles_max_pos[i] = np.int(np.mean(maxposition[0]))
 
-        print 'Z-Profiles MAX Values:', zprofiles_max
-        print 'Z-Profiles MAX Positions:', zprofiles_max_pos
+        print('Z-Profiles MAX Values:', zprofiles_max)
+        print('Z-Profiles MAX Positions:', zprofiles_max_pos)
 
         # loop through all peak positions and return imagelist (igl)
         igl = cut_subimages(peaknum, xpos, ypos, zprofiles_max_pos, self.SpinBox_subimage_size.value(), stack)
@@ -306,7 +306,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         try:
             n, bins, patches = ax4.hist(fwhmz[fwhmz_ok], 10, label='FWHM-Z', normed=0, facecolor='green', alpha=0.75)
         except:
-            print "Only one data point --> no histogram plotted."
+            print('Only one data point --> no histogram plotted.')
             ax4.plot([fwhmz[fwhmz_ok], fwhmz[fwhmz_ok]], [0, 1], 'g-', lw=5, label='FWHM-Z')
 
         ax4.set_xlabel('FWHM-Z [nm]')
@@ -319,7 +319,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         # only save plot when option is checked
         if self.checkBox_SavePeaks.isChecked() == True:
 
-            print 'Saving PSF peaks.'
+            print('Saving PSF peaks.')
             savename =  self.BeadData['FileDir']+'/'+self.BeadData['FileName'][:-4] + '_PSF_FWHM.png'
             fig.savefig(savename)
 
@@ -334,7 +334,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
             dz = np.round(self.MetaInfo['SizeZ']/2)
 
         ratio = self.SpinBox_zspacing.value() / self.SpinBox_pixsize.value()*1000  # pixel in [nm] !!!
-        print 'Aspect Ratio Z-XY : ', ratio
+        print('Aspect Ratio Z-XY : ', ratio)
 
         PSFstack_avg = calc_average_psf(stack, xpos, ypos, zdim, psfwidth)
 
@@ -361,7 +361,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
         ex = self.MetaInfo['WLEx'][newch - 1]
         em = self.MetaInfo['WLEm'][newch - 1]
         exem = str(ex) + ' / ' + str(em) + 'nm'
-        print 'New Ex-Em: ', exem
+        print('New Ex-Em: ', exem)
         self.ExEm_text.setText(exem)
 
     def onremove_hotpix_changed(self):
@@ -526,7 +526,7 @@ def calc_average_psf(imagestack, xpos, ypos, zdim, psfwidth):
         except:
             # it might happen that the avgPSF stack was initialized with a size so thatit tries to include peaks
             # that to close to the border of the image. Those are exclude from the averaging only!
-            print 'PSF Volume for Peak: ', ypos[i], xpos[i], ' was excluded from averaging.'
+            print('PSF Volume for Peak: ', ypos[i], xpos[i], ' was excluded from averaging.')
             bad_psf += 1
 
     # calc the mean of all detected PSFs minus the ones that are too close for the average stack
@@ -597,7 +597,7 @@ def create_xls(heightXY, bgrdXY, fwhmx, fwhmy, fwhmz, zplanes_pos_all, zplanes_m
             sheet1.write(i+5, j, value)
 
     # save XLS file
-    print 'Save Excel to: ', imagedir+imagefile+'_CH='+str(channel)+'_FWHM_XYZ.xls'
+    print('Save Excel to: ', imagedir+imagefile+'_CH='+str(channel)+'_FWHM_XYZ.xls')
     os.chdir(imagedir)
     book.save(imagefile+'_CH='+str(channel)+'_FWHM_XYZ.xls')
 
@@ -624,15 +624,15 @@ def estimate_fwhmz(na=1.0, wl=0.515, imm='Air'):
             n = 1.33  # Water Immersion Objective used
         elif na < 1.0:
             n = 1.0  # Air objective used
-        print "Assuming refractive index: ", n
+        print('Assuming refractive index: ', n)
 
     if wl == 0:
         wl = 0.515  # set to 515nm as default
-        print "Assuming emission wavelength: ", wl
+        print('Assuming emission wavelength: ', wl)
 
     if na == 0:
         na = 1.0  # set default NA to 1.0 if unknown
-        print "Assuming objective NA: ", na
+        print('Assuming objective NA: ', na)
 
     fwhmz_estimate = np.sqrt(2) * n * (wl/1000) / (na**2)
     # the PSF values are normally never as good as the theory predicts ...
