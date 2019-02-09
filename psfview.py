@@ -35,9 +35,9 @@ def psf_orthoview(stack, width, z, ratio, filepath, threshold):
                               exclude_border=True, indices=True, num_peaks=1)
 
     peaknum = len(peaks)
-    xpos = np.zeros(len(peaks))
-    ypos = np.zeros(len(peaks))
-    for p in arange(len(peaks)):
+    xpos = np.zeros(len(peaks), dtype=int)
+    ypos = np.zeros(len(peaks), dtype=int)
+    for p in np.arange(len(peaks)):
         # x and y coordinates from skimage.peak_local_max are switched
         xpos[p] = peaks[p][1]
         ypos[p] = peaks[p][0]
