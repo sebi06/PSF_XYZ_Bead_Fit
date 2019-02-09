@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 from xlwt import Workbook
 import os
 from remove_hotpix import adjust_max
-import bfimage as bf
+import bftools as bf
 import skimage.feature as sf
 
 from PyQt5 import QtCore, QtGui
@@ -54,12 +54,13 @@ from PyQt5.QtWidgets import (QWidget, QPushButton, QLineEdit, QInputDialog,
 from PyQt5.QtCore import QTimer
 
 # import the MainWindow widget from the converted .ui files
-import ui_PSF_XYZ_Dialog_BF_new
+import ui_PSF_XYZ_Dialog_BF
 
 # current version number
 version = 2.0
 
-class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_new):
+
+class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF.Ui_PSF_XYZ_Dialog_BF):
 
     def __init__(self, parent=None):
         super(PSF_XYZ_Dialog_BF, self).__init__(parent)
@@ -69,16 +70,6 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         self.setWindowTitle('PSF-XYZ Automatic Detection BF ' + str(version))
 
         # connect the signals with the slots
-
-        # Browse Image File
-        #QtCore.QObject.connect(self.OpenFile, QtCore.SIGNAL('clicked()'), self.onopen_file)
-
-        # Define a new signal called 'trigger' that has no arguments.
-        #clicked_openfile = pyqtSignal()
-        #clicked_startcalc = pyqtSignal()
-        #changed_spinbox_channel = pyqtSignal()
-        #checked_hotpix = pyqtSignal()
-
         self.OpenFile.clicked.connect(self.onopen_file)
         self.pushButton_StartCalc.clicked.connect(self.onstart_detection)
         self.SpinBox_channel.valueChanged.connect(self.onchannel_changed)
@@ -93,15 +84,16 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         """
         open image file dialog with default starting directory
         """
-        #default_folder = os.getcwd()
+        # default_folder = os.getcwd()
         default_folder = r'c:\Users\m1srh\Documents\GitHub\PSF_XYZ_Bead_Fit'
-        psfstack_filepath = QFileDialog.getOpenFileName(self, 'Open file', default_folder, 'CZI Files (*.czi);; TIF Files (*.tif);; TIFF Files (*.tiff)')
+        psfstack_filepath = QFileDialog.getOpenFileName(self, 'Open file',
+                                                        default_folder,
+                                                        'CZI Files (*.czi);; TIF Files (*.tif);; TIFF Files (*.tiff)')
 
         # update filename inside the GUI
         self.text_filename.setText(psfstack_filepath[0])
 
         # get image data file location
-        #imagefilepath = str(self.text_filename.text())
         self.imagefilepath = str(psfstack_filepath[0])
 
         # specify bioformats_package.jar to use if required
@@ -116,7 +108,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
                                                          namespace=urlnamespace,
                                                          bfpath=bfpackage,
                                                          showinfo=False)
-        #bf.showtypicalmetadata(self.MetaInfo)
+        bf.showtypicalmetadata(self.MetaInfo)
 
         self.objname_text.setText(self.MetaInfo['ObjModel'])
         if self.MetaInfo['NA'] != 'n.a.':
@@ -139,7 +131,6 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         # disable channel selection if there is only one channel
         if self.MetaInfo['SizeC'] < 2:
             self.SpinBox_channel.setEnabled(False)
-
 
     def find_peaks(self, planexy):
         """
@@ -172,7 +163,6 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
 
         # return plist, xpos, ypos, peaknum
         return xpos, ypos, peaknum
-
 
     def fit_psf(self, peaknum, xdim, ydim, zdim, stack, xpos, ypos):
 
@@ -233,7 +223,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
 
             # fit PSF-Z using the Z-profiles with 1D-Gauss
             [bgrd, heightZ, center, fwhm_z, cov, xfit_z[:, i], yfit_z[:, i]] = gf.fitgaussian1D(zrange, zprofiles[:, i],
-                                    self.SpinBox_guess_fwhmz.value(), z_peak_positions[i])
+                                                                                                self.SpinBox_guess_fwhmz.value(), z_peak_positions[i])
 
             results[i, 6] = round(fwhm_z*1000, 0)  # FWHM-Z
             results[i, 7] = zprofiles_max_pos[i]   # Z-Planes
@@ -255,15 +245,14 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
 
         return heightXY, bgrdXY, fwhmx, fwhmy, fwhmz, zplanes_pos_all, zplanes_max_all, fwhmxy_all, fwhmxy_all_ok, igl, fit
 
-
     def display_results(self, xdim, ydim, zdim, stack, imagefilepath, planexy, xpos, ypos, zpos,
-                       fwhmx, fwhmy, fwhmz, heightXY, bgrdXY, fwhm_all, fwhm_all_ok, igl, fit):
+                        fwhmx, fwhmy, fwhmz, heightXY, bgrdXY, fwhm_all, fwhm_all_ok, igl, fit):
 
         # Gauss 2D fit for randomly selected peak
         goodimages = (fwhmx > 0).nonzero()
         tmp = goodimages[0]
         # rn = int(round(random(1)*(len(tmp)-1), 0))
-        rn = np.int(np.round(np.random.rand(1)*(len(tmp)-1),0))
+        rn = np.int(np.round(np.random.rand(1)*(len(tmp)-1), 0))
         img2show = int(tmp[rn])
 
         # display image and detected peaks
@@ -291,19 +280,19 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         ax2.set_title('Random Peak Image shown : ' + str(img2show), fontsize=12)
         ax2.contour(fit(*indices(igl[img2show].shape)), cmap=cm.copper)
         ax2.text(0.90, 0.90, """
-        Channel : %.0f""" %(self.SpinBox_channel.value()),
-            fontsize=12, fontweight='bold', horizontalalignment='right', color='red',
-            verticalalignment='bottom', transform=ax2.transAxes)
+        Channel : %.0f""" % (self.SpinBox_channel.value()),
+                 fontsize=12, fontweight='bold', horizontalalignment='right', color='red',
+                 verticalalignment='bottom', transform=ax2.transAxes)
 
         ax2.text(0.95, 0.05, """
         Height  : %.0f
         Bgrd    : %.0f
         FWHM-X  : %.0f
         FWHM-Y  : %.0f
-        FWHM-Z  : %.0f""" %(np.round(heightXY[img2show], 0), round(bgrdXY[img2show], 0),
-            fwhmx[img2show], fwhmy[img2show], fwhmz[img2show]),
-            fontsize=12, horizontalalignment='right', color='red',
-            verticalalignment='bottom', transform=ax2.transAxes)
+        FWHM-Z  : %.0f""" % (np.round(heightXY[img2show], 0), round(bgrdXY[img2show], 0),
+                             fwhmx[img2show], fwhmy[img2show], fwhmz[img2show]),
+                 fontsize=12, horizontalalignment='right', color='red',
+                 verticalalignment='bottom', transform=ax2.transAxes)
 
         # ax3
         # the histogram of the data
@@ -336,7 +325,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         if self.checkBox_SavePeaks.isChecked() == True:
 
             print('Saving PSF peaks.')
-            savename =  self.BeadData['FileDir']+'/'+self.BeadData['FileName'][:-4] + '_PSF_FWHM.png'
+            savename = self.BeadData['FileDir']+'/'+self.BeadData['FileName'][:-4] + '_PSF_FWHM.png'
             fig.savefig(savename)
 
         # display PSF-OrthoView for selected peak
@@ -381,7 +370,6 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         print('New Ex-Em: ', exem)
         self.ExEm_text.setText(exem)
 
-
     @pyqtSlot()
     def onremove_hotpix_changed(self):
 
@@ -397,10 +385,8 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
             self.SpinBox_tolerance.setEnabled(False)
             self.SpinBox_kernelsize.setEnabled(False)
 
-
     @pyqtSlot()
     def onstart_detection(self):
-
         """A Python dictionary will be created to hold the relevant Metadata."""
 
         self.BeadData = {'Height': 0,
@@ -455,7 +441,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
                 re = 3
                 # process the z-Stack and remove potential hotpixel
                 imagestack = adjust_max(imagestack, maxlimit=th, remove_edge=re, kernelsize=ks, tolerance=tl)
-        
+
         # offset subtraction if image contains an offset
         imagestack = imagestack - self.SpinBox_offset.value()
 
@@ -473,7 +459,7 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         self.BeadData['Z-Dim'] = imagestack.shape[0]
 
         # for testing
-        #print xdim, ydim, zdim
+        # print xdim, ydim, zdim
 
         # PeakFind algorithm for pre-detection of beads
         xpos, ypos, peaknum = self.find_peaks(planexy)
@@ -495,11 +481,11 @@ class PSF_XYZ_Dialog_BF(QDialog, ui_PSF_XYZ_Dialog_BF_new.Ui_PSF_XYZ_Dialog_BF_n
         if self.writexls.isChecked():
 
             create_xls(heightXY, bgrdXY, fwhmx, fwhmy, fwhmz, zplanes_pos_all, zplanes_max_all, fwhmxy_all,
-                           fwhmxy_all_ok, self.SpinBox_channel.value(), imagedir, imagefile)
+                       fwhmxy_all_ok, self.SpinBox_channel.value(), imagedir, imagefile)
 
         # display the results
         self.display_results(xdim, ydim, zdim, imagestack, self.imagefilepath, planexy, xpos, ypos, zpos, fwhmx, fwhmy,
-                            fwhmz, heightXY, bgrdXY, fwhmxy_all, fwhmxy_all_ok, igl, fit)
+                             fwhmz, heightXY, bgrdXY, fwhmxy_all, fwhmxy_all_ok, igl, fit)
 
         plt.show()
 
@@ -521,7 +507,7 @@ def cut_subimages(peaknumber, peakx, peaky, zplanes, subimagesize, stack):
         subimage = imgdata[peaky[i] - sz:peaky[i] + sz + 1, peakx[i] - sz:peakx[i] + sz + 1]
         # store subimage inside a list
         imagelist[i] = subimage
-        #print 'XY Subimage : ', subimage.shape[0], subimage.shape[1]
+        # print 'XY Subimage : ', subimage.shape[0], subimage.shape[1]
 
     return imagelist
 
@@ -579,7 +565,7 @@ def limit_zrange(zdim, dz):
 def create_xls(heightXY, bgrdXY, fwhmx, fwhmy, fwhmz, zplanes_pos_all, zplanes_max_all, fwhm_all, fwhm_all_ok,
                channel, imagedir, imagefile):
 
-    #TODO: Implement writing XLSX File
+    # TODO: Implement writing XLSX File
 
     # create numbers for peaklist
     peaklist = np.arange(0, fwhmx.shape[0], 1)
@@ -669,6 +655,7 @@ def estimate_fwhmz(na=1.0, wl=0.515, imm='Air'):
     return out, n
 
 ####################################################################################################################
+
 
 if __name__ == "__main__":
     import sys
