@@ -21,17 +21,18 @@ The crucial steps are:
 
 :Author: Sebastian Rhode
 
-:Version: 2015.11.02
+:Version: 2019.02.08
 
 Requirements
 ------------
-* `CPython 2.7 <http://www.python.org>`_
-* `Numpy 1.8.2 <http://www.numpy.org>`_
+* `Python 3.6 <http://www.python.org>`_
+* `Numpy <http://www.numpy.org>`_
 * `xlwt <https://pypi.python.org/pypi/xlwt>`_
 * `SciPy <https://pypi.python.org/pypi/scipy>`_
 * `VisVis <https://pypi.python.org/pypi/visvis>`_
 * `Scikit-Image <https://pypi.python.org/pypi/scikit-image>`_
-* `bfimage package <https://github.com/sebi06/BioFormatsRead>`_
+* `czifile <https://pypi.org/project/czifile/>`_
+
 
 Notes
 -----
@@ -42,10 +43,7 @@ References
 ----------
 (1)  CZI - Carl Zeiss Image format for microscopes - http://www.zeiss.com/czi
 (2)  The OME-TIFF format - http://www.openmicroscopy.org/site/support/file-formats/ome-tiff
-(3)  Read microscopy images to numpy array with python-bioformats - http://ilovesymposia.com/2014/08/10/read-microscopy-images-to-numpy-arrays-with-python-bioformats/
-(4)  The Python-BioFormats package - http://downloads.openmicroscopy.org/bio-formats/
-(5)  czifile.py by Christoph Gohlke - http://www.lfd.uci.edu/~gohlke/code/czifile.py.html
-(6)  tifffile.py by Christoph Gohlke - http://www.lfd.uci.edu/~gohlke/code/tifffile.py.html
+(3)  The Python-BioFormats package - http://downloads.openmicroscopy.org/bio-formats/
 
 Screenshots
 -----------
